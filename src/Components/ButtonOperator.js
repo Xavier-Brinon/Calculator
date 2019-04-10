@@ -12,9 +12,14 @@ export const ButtonOperator = ({ display, setDisplay, history: { total, operatio
       if (!operation) {
         setHistory({ total, currentValue })
       } else {
-        const newTotal = operation(total)(currentValue)
-        setHistory({ total: newTotal })
-        setDisplay(newTotal)
+        if (!currentValue) {
+          setHistory({ total })
+          setDisplay(total)
+        } else {
+          const newTotal = operation(total)(currentValue)
+          setHistory({ total: newTotal })
+          setDisplay(newTotal)
+        }
       }
       return
     }
